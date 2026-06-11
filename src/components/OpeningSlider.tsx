@@ -140,7 +140,7 @@ export default function OpeningSlider() {
 
       {/* ================= LEFT SLIDING GLASS PANEL ================= */}
       <div 
-        className={`absolute inset-y-0 left-0 w-1/2 transition-all duration-[1400ms] cubic-bezier(0.85, 0, 0.15, 1) pointer-events-auto flex justify-end items-center border-r border-[#edd6bc]/30 ${
+        className={`absolute inset-y-0 left-0 w-1/2 transition-all duration-[1400ms] pointer-events-auto flex justify-end items-center border-r border-[#edd6bc]/30 ${
           stage === 'parting' ? '-translate-x-[110%] opacity-0' : 'translate-x-0 opacity-100'
         }`}
         style={{
@@ -148,6 +148,7 @@ export default function OpeningSlider() {
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           boxShadow: 'inset -20px 0 60px -10px rgba(253, 230, 138, 0.1)',
+          transitionTimingFunction: 'cubic-bezier(0.85, 0, 0.15, 1)',
         }}
       >
         {/* Soft internal edge highlight glow */}
@@ -180,7 +181,7 @@ export default function OpeningSlider() {
 
       {/* ================= RIGHT SLIDING GLASS PANEL ================= */}
       <div 
-        className={`absolute inset-y-0 right-0 w-1/2 transition-all duration-[1400ms] cubic-bezier(0.85, 0, 0.15, 1) pointer-events-auto flex justify-start items-center border-l border-[#edd6bc]/30 ${
+        className={`absolute inset-y-0 right-0 w-1/2 transition-all duration-[1400ms] pointer-events-auto flex justify-start items-center border-l border-[#edd6bc]/30 ${
           stage === 'parting' ? 'translate-x-[110%] opacity-0' : 'translate-x-0 opacity-100'
         }`}
         style={{
@@ -188,6 +189,7 @@ export default function OpeningSlider() {
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           boxShadow: 'inset 20px 0 60px -10px rgba(253, 230, 138, 0.1)',
+          transitionTimingFunction: 'cubic-bezier(0.85, 0, 0.15, 1)',
         }}
       >
         {/* Soft internal edge highlight glow */}
@@ -220,9 +222,12 @@ export default function OpeningSlider() {
 
       {/* ================= GREETING LAYOUT (STAMP, TILES & TIMER) ================= */}
       <div 
-        className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-[1000ms] cubic-bezier(0.85, 0, 0.15, 1) ${
+        className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-[1000ms] ${
           stage === 'parting' ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100 pointer-events-auto'
         }`}
+        style={{
+          transitionTimingFunction: 'cubic-bezier(0.85, 0, 0.15, 1)'
+        }}
       >
         <div className="text-center space-y-7 z-20 max-w-sm px-6 flex flex-col items-center">
           

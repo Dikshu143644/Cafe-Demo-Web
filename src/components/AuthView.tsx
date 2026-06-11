@@ -116,7 +116,7 @@ export default function AuthView({ onLogin, onSignup, onVerifyOtp, onNavigate }:
   };
 
   return (
-    <div id="auth-lounge-view" className="bg-cafe-cream min-h-screen pt-32 pb-24 font-sans text-cafe-smoky">
+    <div id="auth-lounge-view" className="bg-transparent min-h-screen pt-32 pb-24 font-sans text-cafe-smoky relative z-10">
       <div className="max-w-md mx-auto px-4">
         
         {/* Page Titles */}

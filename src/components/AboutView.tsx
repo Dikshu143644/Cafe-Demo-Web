@@ -3,7 +3,7 @@ import { ChefHat, Compass, Heart, Award } from 'lucide-react';
 
 export default function AboutView() {
   return (
-    <div id="about-view" className="bg-cafe-cream min-h-screen pt-32 pb-24 font-sans text-cafe-smoky">
+    <div id="about-view" className="bg-transparent min-h-screen pt-32 pb-24 font-sans text-cafe-smoky relative z-10">
       
       {/* Title Header */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 mb-16">
@@ -20,7 +20,7 @@ export default function AboutView() {
 
       {/* Hero Visual */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 select-none">
-        <div className="relative rounded-2xl overflow-hidden h-[400px] shadow-2xl border border-[#deb887]/20">
+        <div className="relative rounded-2xl overflow-hidden h-[32vh] min-h-[220px] max-h-[420px] shadow-2xl border border-[#deb887]/20">
           <img
             src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=1200&auto=format&fit=crop"
             alt="Warm coffee house brewing"

@@ -87,7 +87,7 @@ export default function BookingView({
   };
 
   return (
-    <div id="booking-view" className="bg-cafe-cream min-h-screen pt-32 pb-24 font-sans text-cafe-smoky">
+    <div id="booking-view" className="bg-transparent min-h-screen pt-32 pb-24 font-sans text-cafe-smoky relative z-10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Header */}

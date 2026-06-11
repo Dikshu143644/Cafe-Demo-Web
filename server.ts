@@ -160,7 +160,14 @@ async function startServer() {
     if (!aiClient) {
       const apiKey = process.env.GEMINI_API_KEY;
       if (apiKey && apiKey !== 'MY_GEMINI_API_KEY') {
-        aiClient = new GoogleGenAI({ apiKey });
+        aiClient = new GoogleGenAI({
+          apiKey,
+          httpOptions: {
+            headers: {
+              'User-Agent': 'aistudio-build',
+            }
+          }
+        });
       }
     }
     return aiClient;
@@ -428,67 +435,140 @@ async function startServer() {
 
   // AI assistant conversational endpoint
   app.post('/api/assistant', apiRateLimiter({ windowMs: 60000, max: 15, message: "You have reached our digital sanctuary's conversational limit. Please rest 60 seconds." }), async (req, res) => {
-    const { prompt, chatHistory } = req.body;
+    const { prompt, history, chatHistory, user } = req.body;
     if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
     const query = prompt.toLowerCase();
-
-    // 1. Fully-loaded Rule-based intelligent answer module first
     let responseText = '';
-    
-    if (query.includes('recommend') || query.includes('suggest') || query.includes('menu') || query.includes('popular')) {
-      const best = MENU_ITEMS.filter(m => m.isPopular);
-      responseText = `I highly recommend trying our **Gilded Espresso Crema** ($6.50) topped with real 24k gold flakes, or our sensational **Velvet Lavender Honey Latte** ($7.25) prepared with signature oat milk. For pastries, clean-cut favorites include our Parisian twice-baked **Pistachio Glazed Croissant** ($8.50). Would you like me to add one of these fine selections straight into your order?`;
-    } 
+    let actionObj: any = null;
 
-    else if (query.includes('book') || query.includes('table') || query.includes('reserve') || query.includes('seats')) {
-      responseText = `To secure your table at Café Vista, head over to our **Reserve Table** tab in the main glass navigation bar. You will be able to select your date, guest headcount, table preferences (such as our cozy 'Window' or romantic 'Garden' seats). Real-time calendar synchronization runs automatically!`;
-    } 
+    // Try Gemini if available
+    const client = getAIClient();
+    if (client) {
+      try {
+        const systemMsg = `You are the elegant Café Vista AI Concierge and voice assistant.
+Introduce the café as a glassmorphic aesthetic refuge where single-origin brews meet editorial botany under greenhouse glass.
+You have the power to auto-book tables and auto-order (add to cart) on behalf of users in real-time.
 
-    else if (query.includes('hours') || query.includes('time') || query.includes('open') || query.includes('close') || query.includes('when')) {
-      responseText = `Our doors are open for visual coffee experiences during these timetables:
-- **Weekdays (Mon-Fri):** 7:00 AM — 9:00 PM
-- **Saturdays:** 8:00 AM — 10:00 PM
-- **Sundays:** 8:00 AM — 8:00 PM`;
-    } 
+Food Menu: ${JSON.stringify(MENU_ITEMS)}.
+Current User Details: ${user ? JSON.stringify(user) : 'Not Logged In'}.
 
-    else if (query.includes('track') || query.includes('order') || query.includes('my status')) {
-      responseText = `Tracking your active drink or dessert is simple. Simply jump into your **Customer Dashboard** profile. You will see a glowing live tracker displaying whether your order is currently 'Pending', 'Preparing', 'Ready for Collection', or 'Dine-In Completed'!`;
-    } 
+If the user wants to order or add a drink or pastry, set action type to "add_to_cart" and identify the correct itemId (one of m1 to m8) and itemName.
+If the user wants to book or reserve a table/seat, set action type to "book_table" and extract guestsCount, date, time (default 16:30), and tablePreference ("window" | "garden" | "lounge").
+Otherwise, set action to null.
 
-    else if (query.includes('hello') || query.includes('hi ') || query.includes('hey') || query.includes('who are you')) {
-      responseText = `Hello! I am your **Café Vista Digital Concierge Concierge** ☕ No matter if you are looking for culinary coffee recommendations, checking on our glasshouse opening times, or tracking a pending pastry order, I am here to help. Ask me anything!`;
-    }
+You MUST reply ONLY with a JSON object conforming exactly to this structure (no additional fields):
+{
+  "response": "Conversational, eloquent reply text containing markdown. Direct, friendly, and elegant.",
+  "action": {
+    "type": "add_to_cart" | "book_table" | null,
+    "itemId": "m1" | "m2" | "m3" | "m4" | "m5" | "m6" | "m7" | "m8" | null,
+    "itemName": "Item Name String" | null,
+    "guestsCount": number | null,
+    "date": "YYYY-MM-DD" | null,
+    "time": "HH:MM" | null,
+    "tablePreference": "window" | "garden" | "lounge" | null
+  }
+}`;
 
-    // 2. Fallback to Gemini SDK server-side call if configured
-    if (!responseText) {
-      const client = getAIClient();
-      if (client) {
-        try {
-          // Dynamic formatting prompt injection
-          const systemMsg = `You are the elegant Café Vista AI Concierge and support. Introduce the café as a glassmorphic aesthetic refuge where single-origin brews meet editorial design. Guide users smoothly on our food menu: ${JSON.stringify(MENU_ITEMS)}. Maintain a soft, warm, friendly, helpful tone. Be professional, direct, and creative. Use markdown. Help with tables, bookings, or recommendations.`;
-          
-          const aiResponse = await client.models.generateContent({
-            model: 'gemini-1.5-flash',
-            contents: `${systemMsg}\n\nUser Question: ${prompt}`,
-          });
-
-          if (aiResponse.text) {
-            responseText = aiResponse.text;
+        const aiResponse = await client.models.generateContent({
+          model: 'gemini-3.5-flash',
+          contents: `${systemMsg}\n\nUser Prompt: ${prompt}`,
+          config: {
+            responseMimeType: 'application/json'
           }
-        } catch (error: any) {
-          console.error('Gemini fallback warning:', error.message);
-          responseText = `I apologize, our ambient AI system is currently recalibrating its sensory processors. However, as an expert Café concierge, let me help: the Café is open today until 9:00 PM, and we are serving our popular lavender oat lattes and fresh pistachio pastries. Let me know what you would like to know about our menu!`;
+        });
+
+        if (aiResponse.text) {
+          const parsed = JSON.parse(aiResponse.text.trim());
+          responseText = parsed.response;
+          actionObj = parsed.action || null;
         }
-      } else {
-        // Aesthetic rule fallback
-        responseText = `That sounds delicious! At Café Vista, we carry an elegant collection of single-origin espresso creations, delicate herbal infusions like our golden turmeric silk latte, and gourmet crêpes. Feel free to explore our full **Browse Menu** tab to see ingredients, calorie details, and place a customized secure test payment checkout!`;
+      } catch (error: any) {
+        console.error('Gemini assistant structured model error:', error.message);
       }
     }
 
-    res.json({ response: responseText });
+    // Fallback or rule-based parser if Gemini offline or failed
+    if (!responseText) {
+      if (query.includes('recommend') || query.includes('suggest') || query.includes('menu') || query.includes('popular')) {
+        responseText = `I highly recommend our **Gilded Espresso Crema** ($6.50) topped with gold flakes, or our popular **Velvet Lavender Honey Latte** ($7.25) brewed with smooth organic oat milk. For brunch, our **Smoked Salmon Sourdough** ($16.00) is exceptional! Would you like me to add one of these fine options into your cart?`;
+      } 
+      else if (query.includes('order') || query.includes('add') || query.includes('buy') || query.includes('want a') || query.includes('get a')) {
+        let matchedItem = MENU_ITEMS.find(item => query.includes(item.name.toLowerCase()) || query.includes(item.id));
+        if (!matchedItem) {
+          if (query.includes('gilded') || query.includes('gold') || query.includes('espresso')) {
+            matchedItem = MENU_ITEMS.find(item => item.id === 'm1');
+          } else if (query.includes('lavender') || query.includes('honey') || query.includes('velvet')) {
+            matchedItem = MENU_ITEMS.find(item => item.id === 'm2');
+          } else if (query.includes('salmon') || query.includes('sourdough')) {
+            matchedItem = MENU_ITEMS.find(item => item.id === 'm3');
+          } else if (query.includes('croissant') || query.includes('pistachio')) {
+            matchedItem = MENU_ITEMS.find(item => item.id === 'm4');
+          } else if (query.includes('mushroom') || query.includes('truffle') || query.includes('crepe')) {
+            matchedItem = MENU_ITEMS.find(item => item.id === 'm5');
+          } else if (query.includes('brew') || query.includes('cardamom') || query.includes('cold brew')) {
+            matchedItem = MENU_ITEMS.find(item => item.id === 'm6');
+          } else if (query.includes('eclair') || query.includes('éclair') || query.includes('rosewater')) {
+            matchedItem = MENU_ITEMS.find(item => item.id === 'm7');
+          } else if (query.includes('turmeric') || query.includes('silk') || query.includes('yellow')) {
+            matchedItem = MENU_ITEMS.find(item => item.id === 'm8');
+          }
+        }
+
+        if (matchedItem) {
+          responseText = `Certainly! I've automatically added the **${matchedItem.name}** ($${matchedItem.price.toFixed(2)}) to your physical selection. You'll see it in your Cart Drawer now! Let me know if you would like me to add anything else!`;
+          actionObj = {
+            type: 'add_to_cart',
+            itemId: matchedItem.id,
+            itemName: matchedItem.name
+          };
+        } else {
+          responseText = `I couldn't quite resolve which menu item you wanted to order. We have options like Gilded Espresso (m1), Lavender Latte (m2), Pistachio Croissant (m4), or Salmon Sourdough (m3). Which one should I add to your order?`;
+        }
+      } 
+      else if (query.includes('book') || query.includes('table') || query.includes('reserve') || query.includes('seats')) {
+        let pref = 'window';
+        if (query.includes('garden')) pref = 'garden';
+        else if (query.includes('lounge')) pref = 'lounge';
+
+        let guests = 2;
+        const guestMatch = query.match(/(\d+)\s*(guest|people|person|seat)/);
+        if (guestMatch) {
+          guests = parseInt(guestMatch[1]);
+        }
+
+        const dateStr = new Date().toISOString().split('T')[0];
+
+        responseText = `Perfect choice. I have initiated an auto-booking for a **${pref} table** for **${guests} guests** for **today** (${dateStr}) at **16:30** under your profile. It's now fully approved and logged!`;
+        actionObj = {
+          type: 'book_table',
+          guestsCount: guests,
+          date: dateStr,
+          time: '16:30',
+          tablePreference: pref
+        };
+      } 
+      else if (query.includes('hours') || query.includes('time') || query.includes('open') || query.includes('close') || query.includes('when')) {
+        responseText = `Our doors are open for visual coffee experiences during these timetables:
+- **Weekdays (Mon-Fri):** 7:00 AM — 9:00 PM
+- **Saturdays:** 8:00 AM — 10:00 PM
+- **Sundays:** 8:00 AM — 8:00 PM`;
+      } 
+      else if (query.includes('track') || query.includes('order') || query.includes('my status')) {
+        responseText = `Tracking your active order is simple! Simply jump into your **Customer Dashboard** profile tab. You will see a glowing live tracker displaying whether your order is currently 'Pending', 'Preparing', 'Ready for Collection', or 'Dine-In Completed'!`;
+      } 
+      else if (query.includes('hello') || query.includes('hi ') || query.includes('hey') || query.includes('who are you')) {
+        responseText = `Hello! I am your **Café Vista Digital Concierge & Voice Guide** ☕ No matter if you are looking for culinary coffee recommendations, checking on our glasshouse opening times, or tracking a pending pastry order, I am here to help. Ask me anything!`;
+      }
+      else {
+        responseText = `I hear you! At Café Vista, we offer a lovely selection of single-origin beans, hand-kneaded laminated pastries, and real-time custom booking. Feel free to say: *"Order a Velvet Lavender Honey Latte"* or *"Book a garden table for 4 guests"* to see our auto-assistant in action!`;
+      }
+    }
+
+    res.json({ success: true, response: responseText, action: actionObj });
   });
 
   // --- VITE MIDDLEWARE / STATIC DISTRIBUTION ---

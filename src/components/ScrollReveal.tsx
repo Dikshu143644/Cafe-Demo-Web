@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -14,32 +15,11 @@ export default function ScrollReveal({
   className = '',
   direction = 'up'
 }: ScrollRevealProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Once it reveals, we can unobserve if we only want it to animate once
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.05, // triggers early for a snappy feel
-        rootMargin: '0px 0px -40px 0px' // offset so it doesn't trigger when cut off at bottom
-      }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  const [elementRef, isVisible] = useIntersectionObserver({
+    threshold: 0.08,
+    rootMargin: '0px 0px -30px 0px',
+    freezeOnceVisible: false // Ensure repetition when scrolling down and up
+  });
 
   const getDirectionClass = () => {
     switch (direction) {
@@ -54,12 +34,15 @@ export default function ScrollReveal({
   return (
     <div
       ref={elementRef}
-      className={`transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) ${
+      className={`transition-all duration-[950ms] ${
         isVisible 
           ? 'opacity-100 translate-y-0 translate-x-0 scale-100' 
           : `opacity-0 ${getDirectionClass()}`
       } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ 
+        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        transitionDelay: `${delay}ms` 
+      }}
     >
       {children}
     </div>

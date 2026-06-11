@@ -49,7 +49,7 @@ export default function MenuView({
   });
 
   return (
-    <div id="menu-browse-view" className="bg-cafe-cream min-h-screen pt-32 pb-24 font-sans text-cafe-smoky">
+    <div id="menu-browse-view" className="bg-transparent min-h-screen pt-32 pb-24 font-sans text-cafe-smoky relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Head Title */}

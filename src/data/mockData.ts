@@ -7,7 +7,7 @@ export const MENU_ITEMS: MenuItem[] = [
     description: 'Double shot of our house medium-roast single-origin premium beans, topped with a micro-sprinkle of food-grade edible gold dust.',
     price: 6.50,
     category: 'espresso',
-    image: 'https://images.unsplash.com/photo-151097252790b-af4f42df8e40?q=80&w=600&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=600&auto=format&fit=crop',
     isVegan: true,
     isGlutenFree: true,
     isPopular: true,

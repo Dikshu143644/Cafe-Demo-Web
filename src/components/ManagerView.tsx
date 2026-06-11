@@ -34,7 +34,7 @@ export default function ManagerView({
 
   if (!user || user.role !== 'manager') {
     return (
-      <div className="bg-cafe-cream min-h-screen pt-40 px-4 text-center font-sans">
+      <div className="bg-transparent min-h-screen pt-40 px-4 text-center font-sans relative z-10">
         <GlassCard theme="light" className="max-w-md mx-auto space-y-4">
           <AlertOctagon className="w-12 h-12 text-red-500 mx-auto" />
           <h2 className="font-serif text-lg font-bold text-cafe-charcoal uppercase">Access Denied</h2>
@@ -67,7 +67,7 @@ export default function ManagerView({
   ];
 
   return (
-    <div id="manager-dashboard" className="bg-cafe-cream min-h-screen pt-32 pb-24 font-sans text-cafe-smoky">
+    <div id="manager-dashboard" className="bg-transparent min-h-screen pt-32 pb-24 font-sans text-cafe-smoky relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Title */}
