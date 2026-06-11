@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import CartDrawer from './components/CartDrawer';
 import Footer from './components/Footer';
-import OpeningSlider from './components/OpeningSlider';
+import OpeningSlider, { DikshusLogo } from './components/OpeningSlider';
 
 // Routing Views
 import HomeView from './components/HomeView';
@@ -344,17 +344,158 @@ export default function App() {
       {/* Cinematic Opening Slider Loader on first entry */}
       <OpeningSlider />
 
-      {/* Slide Transition Curtain for active tab navigation */}
+      {/* Premium Cinematic Split Transition for Active Tab Navigation */}
       <div 
-        className={`fixed inset-0 z-[9998] bg-[#1e1a17] pointer-events-none transition-all duration-[750ms] cubic-bezier(0.85, 0, 0.15, 1) flex flex-col items-center justify-center ${
-          isTransitioning ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+        className={`fixed inset-0 z-[9998] pointer-events-none flex flex-col md:flex-row transition-all duration-[450ms] ${
+          isTransitioning ? 'opacity-100' : 'opacity-0 delay-300'
         }`}
       >
-        <div className="text-center space-y-3">
-          <span className="text-[10px] uppercase tracking-[0.3em] font-mono text-cafe-gold animate-pulse">Sourcing Sanctuary</span>
-          <h2 className="font-serif italic text-3xl font-extrabold text-[#FDFBF7]">Café Vista</h2>
-          <div className="w-12 h-[1px] bg-cafe-gold/30 mx-auto mt-2"></div>
+        {/* Left sliding dark conservatory pane */}
+        <div 
+          className={`w-full md:w-[42%] h-1/2 md:h-full bg-[#110F0D] relative flex items-center justify-center border-b md:border-b-0 md:border-r border-[#D4AF37]/15 transition-transform duration-[600ms] cubic-bezier(0.85, 0, 0.15, 1) pointer-events-auto ${
+            isTransitioning ? 'translate-x-0' : '-translate-x-full'
+          }`}
+          style={{
+            boxShadow: 'inset -20px 0 50px -10px rgba(0,0,0,0.8)'
+          }}
+        >
+          {/* Underlay Glasshouse Conservatory Interior Atmosphere */}
+          <div 
+            className="absolute inset-0 pointer-events-none mix-blend-luminosity opacity-40 scale-[1.02]"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              filter: 'contrast(1.15) brightness(0.6) sepia(0.2) saturate(0.8)',
+            }}
+          />
+
+          {/* Ambient Dark Charcoal Shade overlay */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-black via-black/90 to-transparent pointer-events-none"></div>
+
+          {/* ================= GOLD CRESCENT WIREFRAME CIRCLE VECTOR ================= */}
+          <div 
+            className="absolute -right-[230px] w-[460px] h-[460px] rounded-full border border-[#D4AF37]/30 pointer-events-none opacity-80 hidden md:block"
+            style={{
+              transform: 'translateY(-50%)',
+              top: '50%',
+              boxShadow: 'inset 0 0 40px rgba(212, 175, 55, 0.05)',
+            }}
+          >
+            {/* Subtle concentric inner gold ring contour */}
+            <div className="absolute inset-[15px] rounded-full border border-[#D4AF37]/15 opacity-60"></div>
+            {/* Subtle outer radiating contour */}
+            <div className="absolute -inset-[15px] rounded-full border border-[#D4AF37]/10 opacity-30"></div>
+          </div>
+
+          {/* ================= CINEMATIC HORIZONTAL GLOW RAY ================= */}
+          <div className="absolute left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#E1C58F] to-transparent opacity-85 z-20 pointer-events-none flex items-center justify-end">
+            {/* Bright glint right on the boundary crease */}
+            <div className="absolute right-0 w-3 h-3 rounded-full bg-white shadow-[0_0_12px_4px_#FFF,0_0_20px_8px_#FFE082] -translate-x-1/2 animate-pulse shrink-0"></div>
+            {/* Extra trailing laser line bloom */}
+            <div className="w-[180px] h-[6px] bg-gradient-to-r from-transparent to-[#EAC352]/30 blur-sm rounded-full absolute right-0"></div>
+          </div>
         </div>
+
+        {/* Right sliding cream pane */}
+        <div 
+          className={`w-full md:w-[58%] h-1/2 md:h-full bg-[#FAF8F5] relative flex flex-col justify-center px-8 sm:px-16 md:px-24 py-12 transition-transform duration-[600ms] cubic-bezier(0.85, 0, 0.15, 1) pointer-events-auto ${
+            isTransitioning ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          {/* Soft paper grain background overlay */}
+          <div 
+            className="absolute inset-0 opacity-[0.02] pointer-events-none"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`
+            }}
+          />
+
+          {/* Soft shadow vignette on right pane to add depth */}
+          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-black/[0.02] to-transparent pointer-events-none hidden md:block"></div>
+
+          <div className="max-w-md w-full mx-auto space-y-10 z-20 flex flex-col justify-between h-full md:h-auto text-center md:text-left">
+            {/* spacer */}
+            <div className="hidden md:block"></div>
+
+            {/* ================= MINIMAL LUXURY LINE stamp / arch leaf BADGE ================= */}
+            <div className="flex justify-center md:justify-start">
+              <div 
+                className="w-14 h-22 rounded-full border border-[#D4AF37]/50 flex items-center justify-center p-2 relative shadow-sm"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(250,248,245,0.3) 100%)',
+                }}
+              >
+                {/* Ultra fine inner dashed line */}
+                <div className="absolute inset-[3px] rounded-full border border-[#D4AF37]/15"></div>
+
+                {/* Gold brand logo icon */}
+                <div className="w-10 h-10 flex items-center justify-center relative">
+                  <DikshusLogo className="w-full h-full opacity-90 drop-shadow-[0_1px_2px_rgba(94,81,61,0.1)]" gold={true} />
+                </div>
+              </div>
+            </div>
+
+            {/* ================= CENTRAL LUXURIOUS SERIF HEADING ================= */}
+            <div className="space-y-4">
+              <h1 
+                className="font-serif text-5xl sm:text-[5.4rem] font-light text-[#1A1816] tracking-[0.14em] leading-[1.05] drop-shadow-sm"
+                style={{
+                  fontFamily: `'Playfair Display', Georgia, serif`,
+                  textRendering: 'optimizeLegibility',
+                }}
+              >
+                DIKSHU'S CAFE
+              </h1>
+
+              <p 
+                className="text-xs sm:text-[13px] text-[#8C7B6B] tracking-[0.25em] translate-y-2 uppercase font-medium"
+                style={{ fontFamily: `'Playfair Display', Georgia, serif` }}
+              >
+                London's Glasshouse Sanctuary
+              </p>
+
+              {/* Little separation leaf stamp or customized divider dot */}
+              <div className="flex items-center justify-center md:justify-start gap-3 pt-3 opacity-80">
+                <span className="h-[0.5px] w-6 bg-[#C4A484]/35"></span>
+                <span className="text-[10px] text-[#A8947C] font-mono select-none">✦</span>
+                <span className="h-[0.5px] w-6 bg-[#C4A484]/35"></span>
+              </div>
+
+              <p className="text-[9px] tracking-[0.38em] uppercase font-bold text-[#A69380] font-mono pt-1">
+                Established MMXVI • London
+              </p>
+            </div>
+
+            {/* ================= HIGH-END MINIMAL CHROME LOADER TRACK ================= */}
+            <div className="space-y-2 pt-2">
+              <div className="flex justify-between items-end text-[9px] font-mono uppercase tracking-[0.3em] font-bold text-[#7E7063] px-0.5">
+                <span>Sourcing Sanctuary</span>
+                <span className="animate-pulse">Loading...</span>
+              </div>
+
+              {/* Ultra-fine loading line */}
+              <div className="w-full h-[1.5px] bg-[#E3DDD4] relative rounded-full overflow-hidden">
+                <div 
+                  className="absolute top-0 h-full bg-[#1A1A1A] w-1/2 rounded-full"
+                  style={{
+                    animation: 'loadingSweepPulse 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite'
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* spacer */}
+            <div className="hidden md:block"></div>
+          </div>
+        </div>
+
+        <style>{`
+          @keyframes loadingSweepPulse {
+            0% { transform: translateX(-110%); }
+            100% { transform: translateX(210%); }
+          }
+        `}</style>
       </div>
       
       {/* Floating Glass Navigation Bar */}

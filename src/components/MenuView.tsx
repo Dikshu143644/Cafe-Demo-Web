@@ -3,6 +3,7 @@ import { Search, RotateCcw, Compass, Droplet, Star, Leaf, Check, Plus, X } from 
 import { MenuItem } from '../types';
 import ProductCard from './ProductCard';
 import GlassCard from './GlassCard';
+import ScrollReveal from './ScrollReveal';
 
 interface MenuViewProps {
   menuItems: MenuItem[];
@@ -65,7 +66,8 @@ export default function MenuView({
         </div>
 
         {/* Filter bar panels */}
-        <div className="bg-white/45 backdrop-blur-md rounded-2xl p-6 border border-[#deb887]/25 shadow-sm space-y-4 mb-10">
+        <ScrollReveal direction="up" delay={50} className="w-full">
+          <div className="glass-light rounded-2xl p-6 space-y-4 mb-10">
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
             {/* Search Input */}
@@ -139,8 +141,8 @@ export default function MenuView({
               </button>
             )}
           </div>
-
-        </div>
+          </div>
+        </ScrollReveal>
 
         {/* Product Card grids lists */}
         {filteredItems.length === 0 ? (

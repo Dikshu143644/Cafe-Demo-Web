@@ -114,7 +114,7 @@ export default function ContactView({ onSendMessage }: ContactViewProps) {
             </div>
 
             {/* Newsletter card */}
-            <div className="bg-[#a38059]/10 border border-[#a38059]/25 rounded-2xl p-6 space-y-4">
+            <div className="glass-light rounded-2xl p-6 space-y-4">
               <span className="text-[10px] tracking-widest uppercase font-bold text-cafe-bronze font-mono block">
                 / JOuRNEY GAZETTE
               </span>
@@ -152,7 +152,7 @@ export default function ContactView({ onSendMessage }: ContactViewProps) {
 
           {/* Right Column: interactive contact submission form */}
           <div className="lg:col-span-7">
-            <GlassCard theme="light" className="bg-white/60 p-8 border border-[#deb887]/30 shadow-2xl" hoverEffect={false}>
+            <GlassCard theme="light" className="p-8" hoverEffect={false}>
               
               {!showSuccess ? (
                 <form onSubmit={handleSubmit} className="space-y-6">

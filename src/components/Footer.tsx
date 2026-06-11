@@ -1,5 +1,6 @@
 import React from 'react';
 import { Coffee, MapPin, Phone, Mail, ChevronUp, Star } from 'lucide-react';
+import { DikshusLogo } from './OpeningSlider';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -24,11 +25,11 @@ export default function Footer({ onNavigate }: FooterProps) {
           {/* Logo & Description */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2 cursor-pointer" onClick={() => { onNavigate('home'); window.scrollTo(0,0); }}>
-              <div className="w-8 h-8 rounded-full bg-cafe-gold/20 flex items-center justify-center border border-cafe-gold/30">
-                <Coffee className="w-4 h-4 text-cafe-gold" />
+              <div className="w-8 h-8 rounded-full bg-cafe-gold/20 flex items-center justify-center border border-cafe-gold/30 overflow-hidden">
+                <DikshusLogo className="w-7 h-7 text-cafe-gold" gold={true} />
               </div>
               <span className="font-serif text-lg font-semibold tracking-wider text-cafe-cream uppercase">
-                Café Vista
+                Dikshu's Cafe
               </span>
             </div>
             <p className="text-xs text-cafe-cream/60 leading-relaxed font-sans mt-2">
@@ -95,7 +96,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 text-cafe-gold shrink-0" />
-                <span className="text-cafe-cream/70">hello@cafevista.com</span>
+                <span className="text-cafe-cream/70">hello@dikshuscafe.com</span>
               </li>
             </ul>
           </div>
@@ -130,9 +131,9 @@ export default function Footer({ onNavigate }: FooterProps) {
           
           <div className="mb-4 sm:mb-0 text-center sm:text-left">
             <span className="block font-serif tracking-widest text-[#d1b48c] text-sm italic mb-1">
-              Thank you for supporting Café Vista!
+              Thank you for supporting Dikshu's Cafe!
             </span>
-            <span>&copy; {new Date().getFullYear()} Café Vista Inc. All rights reserved.</span>
+            <span>&copy; {new Date().getFullYear()} Dikshu's Cafe Inc. All rights reserved.</span>
           </div>
 
           {/* Back to Top */}

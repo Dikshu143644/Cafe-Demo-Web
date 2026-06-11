@@ -2,6 +2,7 @@ import React from 'react';
 import { Sparkles, Calendar, Coffee, ChevronRight, Check, Star } from 'lucide-react';
 import { MenuItem } from '../types';
 import ScrollReveal from './ScrollReveal';
+import SanctuaryCustomizer from './SanctuaryCustomizer';
 
 interface HomeViewProps {
   onNavigate: (page: string) => void;
@@ -243,6 +244,41 @@ export default function HomeView({ onNavigate, featuredItems, onAddToCart }: Hom
         </div>
       </section>
 
+      {/* ================= INTERACTIVE ATMOSPHERE SYNTHESIZER ================= */}
+      <section className="bg-cafe-cream py-16 border-b border-[#deb887]/20 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal direction="up" delay={50}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-4">
+                <span className="text-[10px] uppercase font-bold text-cafe-bronze tracking-widest font-mono block">
+                  / LUXURY AMBIENT INTERACTIVITY
+                </span>
+                <h2 className="font-serif text-3xl sm:text-5xl text-cafe-charcoal font-bold uppercase tracking-tight">
+                  Design Your <br />
+                  <span className="italic font-light">Sanctuary Vibe</span>
+                </h2>
+                <p className="text-xs sm:text-sm text-cafe-charcoal/70 leading-relaxed max-w-md">
+                  Crafting a beautiful physical visit requires attention to sensory precision. Utilize our organic scent-to-sound synthesizer to experience the dynamic moisture levels, coffee steam thickness, and peaceful breeze melodies that exist inside our glasshouse domes in real-time. Unmute to listen to the live-generated synthesized sanctuary hum!
+                </p>
+                <div className="pt-2">
+                  <button
+                    onClick={() => onNavigate('booking')}
+                    className="h-12 px-6 bg-cafe-charcoal hover:bg-cafe-gold text-white hover:text-cafe-charcoal text-xs font-bold uppercase tracking-widest rounded-xl shadow-md transition-all cursor-pointer flex items-center space-x-2"
+                  >
+                    <span>Pre-Book Your Table Seat</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <SanctuaryCustomizer />
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* ================= BRAND STORY TEASER ================= */}
       <section id="about-teaser" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -273,7 +309,7 @@ export default function HomeView({ onNavigate, featuredItems, onAddToCart }: Hom
               Crafting Safe Refuges for the Slow-Washed Generation
             </h2>
             <p className="text-xs sm:text-sm text-cafe-charcoal/85 leading-relaxed font-sans">
-              Founded in 2022 on a simple belief: the world moves too quickly, but coffee should never be rushed. At Café Vista, we pair classic French lamination methods with meticulously measured double-shot espresso extractions. 
+              Founded in 2022 on a simple belief: the world moves too quickly, but coffee should never be rushed. At Dikshu's Cafe, we pair classic French lamination methods with meticulously measured double-shot espresso extractions. 
             </p>
             <p className="text-xs sm:text-sm text-cafe-charcoal/85 leading-relaxed font-sans">
               Under our soaring glasshouse architectures, we invite you to disconnect from digital clutter, watch the natural daylight shift across raw concrete wood tables, and experience authentic human craftsmanship in progress.
@@ -313,7 +349,7 @@ export default function HomeView({ onNavigate, featuredItems, onAddToCart }: Hom
                 role: "Brand Director"
               },
               {
-                text: "Cafe Vista is an architectural masterclass! The 3D folding pastry options are out of this world, and my table booking is synced with Google Calendar instantly. Exceptional service.",
+                text: "Dikshu's Cafe is an architectural masterclass! The 3D folding pastry options are out of this world, and my table booking is synced with Google Calendar instantly. Exceptional service.",
                 author: "Marcus Vance",
                 role: "Editorial Architect"
               },

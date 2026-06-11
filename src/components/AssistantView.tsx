@@ -15,7 +15,7 @@ export default function AssistantView({ onSendMessage }: AssistantViewProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       sender: 'assistant',
-      text: "Hello! I am your **Café Vista Digital Concierge** ☕ No matter if you are looking for culinary coffee recommendations, checking on our glasshouse opening times, or tracking a pending pastry order, I am here to help. Ask me anything!"
+      text: "Hello! I am your **Dikshu's Cafe Digital Concierge** ☕ No matter if you are looking for culinary coffee recommendations, checking on our glasshouse opening times, or tracking a pending pastry order, I am here to help. Ask me anything!"
     }
   ]);
   const [inputText, setInputText] = useState('');
@@ -87,7 +87,7 @@ export default function AssistantView({ onSendMessage }: AssistantViewProps) {
         </div>
 
         {/* Master Glass Panel */}
-        <GlassCard theme="light" className="h-[550px] max-w-3xl mx-auto flex flex-col justify-between border border-[#deb887]/30 bg-white/60 p-0 shadow-2xl relative" hoverEffect={false}>
+        <GlassCard theme="light" className="h-[550px] max-w-3xl mx-auto flex flex-col justify-between p-0 relative" hoverEffect={false}>
           
           {/* Header */}
           <div className="px-6 py-4.5 border-b border-cafe-smoky/5 bg-white/20 flex items-center justify-between">
@@ -96,7 +96,7 @@ export default function AssistantView({ onSendMessage }: AssistantViewProps) {
                 <Coffee className="w-4 h-4 text-cafe-gold text-center" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase text-cafe-charcoal block leading-none">Vista bot guide</span>
+                <span className="text-xs font-bold uppercase text-cafe-charcoal block leading-none">Dikshu bot guide</span>
                 <span className="text-[9px] uppercase tracking-wider text-emerald-600 block mt-0.5 font-bold font-mono">● Active conversational stream</span>
               </div>
             </div>

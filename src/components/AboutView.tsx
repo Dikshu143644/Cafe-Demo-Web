@@ -14,7 +14,7 @@ export default function AboutView() {
           Our Journey &amp; Legacy
         </h1>
         <p className="text-xs sm:text-base text-cafe-charcoal/70 max-w-2xl mx-auto leading-relaxed">
-          From a tiny single-roaster brick room to a glasshouse sanctuary of unhurried brewing. Meet the people, values, and slow-roasted science behind Café Vista.
+          From a tiny single-roaster brick room to a glasshouse sanctuary of unhurried brewing. Meet the people, values, and slow-roasted science behind Dikshu's Cafe.
         </p>
       </div>
 
@@ -56,7 +56,7 @@ export default function AboutView() {
             {
               icon: <Heart className="w-5 h-5 text-cafe-gold" />,
               title: "Empathetic Hospitality",
-              desc: "We greet our guests with warmth and zero rush. Café Vista remains a calm harbor for long chats and unhurried thoughts."
+              desc: "We greet our guests with warmth and zero rush. Dikshu's Cafe remains a calm harbor for long chats and unhurried thoughts."
             },
             {
               icon: <Award className="w-5 h-5 text-cafe-gold" />,

@@ -136,7 +136,7 @@ export default function BookingView({
         </div>
 
         {/* Booking Master Card */}
-        <GlassCard theme="light" className="shadow-2xl max-w-2xl mx-auto border border-[#deb887]/30 bg-white/60" hoverEffect={false}>
+        <GlassCard theme="light" className="max-w-2xl mx-auto" hoverEffect={false}>
           
           {!showSuccess ? (
             <form onSubmit={handleSubmit} className="space-y-6">

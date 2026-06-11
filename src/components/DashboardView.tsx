@@ -29,7 +29,7 @@ export default function DashboardView({
           <User className="w-12 h-12 text-cafe-cream/30 mx-auto" />
           <h2 className="font-serif text-lg font-bold text-cafe-charcoal uppercase">Access Denied</h2>
           <p className="text-xs text-cafe-charcoal/60 leading-relaxed">
-            Please log in or register a new Café Vista account to view your customizable rewards dashboards.
+            Please log in or register a new Dikshu's Cafe account to view your customizable rewards dashboards.
           </p>
           <button
             onClick={() => onNavigate('login')}
@@ -127,7 +127,7 @@ export default function DashboardView({
             </div>
 
             {/* Account Quick Specs */}
-            <div className="bg-white/55 backdrop-blur-md rounded-2xl p-5 border border-[#deb887]/25 space-y-4">
+            <div className="glass-light rounded-2xl p-5 space-y-4">
               <span className="text-[10px] uppercase font-mono tracking-widest text-cafe-bronze font-bold block pb-1 border-b border-cafe-smoky/5">
                 Biological summary
               </span>
@@ -180,7 +180,7 @@ export default function DashboardView({
                   </h3>
                   
                   {userFavorites.length === 0 ? (
-                    <div className="p-8 text-center bg-white/35 rounded-2xl border border-[#deb887]/20 text-xs text-cafe-charcoal/50">
+                    <div className="p-8 text-center glass-light rounded-2xl text-xs text-cafe-charcoal/50">
                       You haven't favorited any café items yet. Flip standard card back panels during menu discovery to add favorites.
                     </div>
                   ) : (
@@ -188,7 +188,7 @@ export default function DashboardView({
                       {userFavorites.map((fav) => (
                         <div
                           key={fav.id}
-                          className="flex items-center space-x-3 p-3.5 bg-white border border-[#deb887]/25 rounded-xl hover:border-cafe-gold/30 transition-all shadow-sm"
+                          className="flex items-center space-x-3 p-3.5 glass-light border border-white hover:border-cafe-gold/30 rounded-xl transition-all"
                         >
                           <img
                             referrerPolicy="no-referrer"
@@ -213,7 +213,7 @@ export default function DashboardView({
                 </div>
 
                 {/* AI Concierge quick widget promo */}
-                <div className="bg-[#a38059]/10 border border-[#a38059]/25 p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="glass-light p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="space-y-1 text-center sm:text-left">
                     <span className="text-[10px] uppercase font-bold text-cafe-bronze tracking-wide block">PROACTIVE CONCIERGE HELP</span>
                     <h4 className="font-serif text-sm font-semibold text-cafe-charcoal uppercase leading-relaxed">Let AI plan your diet?</h4>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Coffee, ShoppingBag, User, LayoutDashboard, MessageSquare, Menu, X, Star } from 'lucide-react';
 import { UserRole } from '../types';
+import { DikshusLogo } from './OpeningSlider';
 
 interface NavbarProps {
   currentPage: string;
@@ -62,12 +63,12 @@ export default function Navbar({
             className="flex items-center space-x-2.5 cursor-pointer group"
             onClick={() => handleLinkClick('home')}
           >
-            <div className="w-9 h-9 rounded-full bg-cafe-charcoal flex items-center justify-center transition-transform duration-500 group-hover:rotate-180">
-              <div className="w-4 h-4 border-2 border-white rounded-sm rotate-45"></div>
+            <div className="w-9 h-9 rounded-full bg-cafe-charcoal flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+              <DikshusLogo className="w-8 h-8 filter invert shrink-0" />
             </div>
             <div>
               <span className="font-serif text-xl tracking-tight font-bold italic text-cafe-charcoal block leading-none">
-                Cafe Vista
+                Dikshu's Cafe
               </span>
               <span className="text-[8px] uppercase tracking-[0.2em] text-cafe-gold block mt-0.5 font-bold">
                 Artisanal Sanctuary

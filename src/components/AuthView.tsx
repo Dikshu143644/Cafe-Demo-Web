@@ -72,7 +72,7 @@ export default function AuthView({ onLogin, onSignup, onVerifyOtp, onNavigate }:
     setSuccessNotice('');
 
     if (!termsChecked) {
-      setErrorNotice('Please accept the Café terms explicitly first');
+      setErrorNotice('Please accept the Dikshu\'s terms explicitly first');
       return;
     }
 
@@ -125,13 +125,13 @@ export default function AuthView({ onLogin, onSignup, onVerifyOtp, onNavigate }:
             / ENTRANCE SECURITY
           </span>
           <h1 className="font-serif text-3xl font-bold uppercase text-cafe-charcoal">
-            The Vista Lounge
+            The Dikshu Lounge
           </h1>
           <p className="text-xs text-cafe-charcoal/60">Registered users unlock exclusive loyalty rewards multiplier coefficients.</p>
         </div>
 
         {/* Master Glass Form */}
-        <GlassCard theme="light" className="bg-white/60 p-8 border border-[#deb887]/30 shadow-2xl relative" hoverEffect={false}>
+        <GlassCard theme="light" className="p-8 relative" hoverEffect={false}>
           
           {/* Error Notices Block */}
           {errorNotice && (
