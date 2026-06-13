@@ -80,9 +80,17 @@ export default function AuthView({ onLogin, onSignup, onVerifyOtp, onNavigate }:
 
     try {
       const result = await onSignup(signupName, signupEmail, signupPhone, signupPass);
-      setOtpTargetEmail(signupEmail);
-      setOtpTimer(59);
-      setShowOtpView(true);
+      if (result.directLoggedIn && result.user) {
+        setSuccessNotice(`Welcome ${result.user.name}! Your account has been registered successfully.`);
+        setTimeout(() => {
+          if (result.user.role === 'manager') onNavigate('manager');
+          else onNavigate('dashboard');
+        }, 1500);
+      } else {
+        setOtpTargetEmail(signupEmail);
+        setOtpTimer(59);
+        setShowOtpView(true);
+      }
     } catch (err: any) {
       setErrorNotice(err.message || 'Registration constraints failed');
     } finally {
@@ -231,12 +239,6 @@ export default function AuthView({ onLogin, onSignup, onVerifyOtp, onNavigate }:
                     </div>
                   </div>
 
-                  {/* login credentials cheat notice */}
-                  <div className="p-3 bg-cafe-smoky/5 border border-cafe-smoky/5 rounded-xl text-[9px] font-mono tracking-wide text-cafe-charcoal/50 leading-relaxed">
-                    🌟 QUICK TEST CREDENTIALS CHIPS: <br />
-                    • Customer Login: <strong>elena@cafevista.com</strong> | Pass: <strong>test1234</strong> <br />
-                    • Manager Desk: <strong>manager@cafevista.com</strong> | Pass: <strong>admin1234</strong>
-                  </div>
 
                   <button
                     type="submit"

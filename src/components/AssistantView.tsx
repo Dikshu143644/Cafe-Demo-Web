@@ -397,11 +397,11 @@ export default function AssistantView({
   ];
 
   return (
-    <div id="ai-voice-assistant-page" className="bg-transparent h-[calc(100dvh-75px)] sm:h-[calc(100vh-90px)] pt-14 sm:pt-20 pb-2 sm:pb-6 font-sans text-cafe-smoky relative z-10 flex flex-col justify-start overflow-hidden">
-      <div className="max-w-5xl mx-auto px-2 sm:px-6 w-full flex-grow flex flex-col justify-start overflow-hidden">
+    <div id="ai-voice-assistant-page" className="bg-transparent min-h-[calc(100vh-130px)] pt-16 sm:pt-24 pb-8 sm:pb-16 font-sans text-cafe-smoky relative z-10 flex flex-col justify-start">
+      <div className="max-w-5xl mx-auto px-2 sm:px-6 w-full flex flex-col justify-start">
         
         {/* Page Title Header */}
-        <div className="text-center space-y-1 mb-2 sm:mb-4 shrink-0">
+        <div className="text-center space-y-1 mb-4 sm:mb-8 shrink-0">
           <span className="text-[9px] sm:text-[10px] uppercase font-bold text-cafe-gold tracking-widest font-mono bg-cafe-smoky text-white px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full border border-cafe-gold/30 inline-block">
             🤖 AUTOMATED VOICE & CHAT CONCIERGE
           </span>
@@ -414,10 +414,10 @@ export default function AssistantView({
         </div>
 
         {/* Center-aligned Chat Container */}
-        <div id="voice-assistant-chat-wrapper" className="flex justify-center w-full relative z-30 animate-scaleUp flex-grow overflow-hidden">
+        <div id="voice-assistant-chat-wrapper" className="flex justify-center w-full relative z-30 animate-scaleUp">
           
-          {/* Main Chat Interface */}
-          <div className="w-full max-w-3xl flex flex-col justify-start h-full overflow-hidden">
+          {/* Main Chat Interface with precise responsive height bounds */}
+          <div className="w-full max-w-3xl flex flex-col justify-start h-[75vh] min-h-[480px] max-h-[740px] overflow-hidden">
             
             <GlassCard theme="light" className="h-full w-full flex flex-col justify-between p-0 overflow-hidden relative shadow-2xl border-2 border-[#A88665]/40" hoverEffect={false}>
               

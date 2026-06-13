@@ -171,7 +171,7 @@ export default function HomeView({ onNavigate, featuredItems, onAddToCart }: Hom
                 >
                   <div className="w-full h-[18vw] sm:h-[12vw] lg:h-[9vw] xl:h-[130px] bg-cafe-smoky rounded-xl sm:rounded-2xl relative overflow-hidden shrink-0 [transform:translateZ(0)] border border-white/10">
                     <img
-                      src="https://images.unsplash.com/photo-1544016768-982d1554f0b9?q=80&w=600&auto=format&fit=crop"
+                      src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=600&auto=format&fit=crop"
                       alt="Reserved Seating"
                       className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out will-change-transform"
                       referrerPolicy="no-referrer"
